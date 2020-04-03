@@ -1,0 +1,38 @@
+version: '1'
+
+networks:
+  pharma:
+    external:
+      name: pharma
+
+services:
+
+  cli.pharma-network.com:
+    container_name: cli.pharma-network.com
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.allparticipants.pharma-network.com:7051
+      - CORE_PEER_LOCALMSPID=AllParticipantsMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/allparticipants.pharma-network.com/peers/peer0.allparticipants.pharma-network.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/allparticipants.pharma-network.com/peers/peer0.allparticipants.pharma-network.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/allparticipants.pharma-network.com/peers/peer0.allparticipants.pharma-network.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/allparticipants.pharma-network.com/users/Admin@allparticipants.pharma-network.com/msp
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=pharma
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+    networks:
+      - pharma
+
+

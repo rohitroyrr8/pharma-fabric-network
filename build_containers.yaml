@@ -1,0 +1,47 @@
+version: '1'
+
+volumes:
+  orderer.pharma-network.com:
+  peer0.allparticipants.pharma-network.com:
+  peer1.allparticipants.pharma-network.com:
+
+networks:
+  pharma:
+    external:
+      name: pharma
+
+services:
+
+  ca.allparticipants.pharma-network.com:
+    extends:
+      file: ca_configuration.yaml
+      service: ca.allparticipants.pharma-network.com
+    container_name: ca.allparticipants.pharma-network.com
+    networks:
+      - pharma
+  
+  orderer.pharma-network.com:
+    extends:
+      file: orderer_configuration.yaml
+      service: orderer.pharma-network.com
+    container_name: orderer.pharma-network.com
+    networks:
+      - pharma
+
+  peer0.allparticipants.pharma-network.com:
+    container_name: peer0.allparticipants.pharma-network.com
+    extends:
+      file: peer_configuration.yaml
+      service: peer0.allparticipants.pharma-network.com
+    networks:
+      - pharma
+
+  peer1.allparticipants.pharma-network.com:
+    container_name: peer1.allparticipants.pharma-network.com
+    extends:
+      file: peer_configuration.yaml
+      service: peer1.allparticipants.pharma-network.com
+    networks:
+      - pharma
+
+

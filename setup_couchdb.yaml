@@ -1,0 +1,48 @@
+version: '1'
+
+networks:
+  pharma:
+    external:
+      name: pharma
+
+services:
+
+  couchdb.peer0.allparticipants.pharma-network.com:
+    container_name: couchdb.peer0.allparticipants.pharma-network.com
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=dev_peer0_admin
+      - COUCHDB_PASSWORD=dev_peer0_admin_pass
+    ports:
+      - "5984:5984"
+    networks:
+      - pharma
+
+  peer0.allparticipants.pharma-network.com:
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.allparticipants.pharma-network.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=dev_peer0_admin
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=dev_peer0_admin_pass
+    depends_on:
+      - couchdb.peer0.allparticipants.pharma-network.com
+
+  couchdb.peer1.allparticipants.pharma-network.com:
+    container_name: couchdb.peer1.allparticipants.pharma-network.com
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=dev_peer1_admin
+      - COUCHDB_PASSWORD=dev_peer1_admin_pass
+    ports:
+      - "6984:5984"
+    networks:
+      - pharma
+
+  peer1.allparticipants.pharma-network.com:
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.allparticipants.pharma-network.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=dev_peer1_admin
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=dev_peer1_admin_pass
+    depends_on:
+      - couchdb.peer1.allparticipants.pharma-network.com
