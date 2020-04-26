@@ -63,6 +63,8 @@ function copyOrgCerts() {
 
     echo $'\n'"Copying new genesis and channel configuration..."$'\n'
     cp -r ./channel-artifacts/* ./docker-builds/$1/machine1/channel-artifacts/
+    rm -rf ./crypto-config/*
+    rm -rf ./channel-artifacts/*
     echo $'\n'"Copied successfully!"$'\n'
 
 }
@@ -137,7 +139,7 @@ echo "##########################################################"
 echo "# Generating anchor transactions using configtxgen tool  #"
 echo "##########################################################"
 
-for i in "${network_orgs[@]}"
+for i in ${network_orgs[@]}
 do
     createAnchorPeerTransactions $i
 done
@@ -148,7 +150,7 @@ echo "##########################################################################
 
 for i in "${network_orgs[@]}"
 do
-    copyOrgCerts $i
+    copyOrgCerts ${i,,}
 done
 
 
