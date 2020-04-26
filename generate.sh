@@ -17,7 +17,6 @@ function generateCerts() {
     fi
 
     echo
-    sleep 10
     echo
 }
 
@@ -66,7 +65,6 @@ function copyOrgCerts() {
     cp -r ./channel-artifacts/* ./docker-builds/$1/machine1/channel-artifacts/
     echo $'\n'"Copied successfully!"$'\n'
 
-    sleep 5
 }
 
 function generateGenesisBlock() {
@@ -84,7 +82,6 @@ function generateGenesisBlock() {
     configtxgen -profile OrdererGenesis -outputBlock ./channel-artifacts/genesis.block -channelID $CHANNEL_NAME
     echo $'\n'"######## Genesis block created successfully ###########"$'\n'
 
-    sleep 10
 }
 
 function createChannel() {
@@ -107,7 +104,6 @@ function createAnchorPeerTransactions() {
 
     configtxgen -profile ChannelGenesis -outputAnchorPeersUpdate ./channel-artifacts/$1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg $1
 
-    sleep 5
 }
 
 echo "##########################################################"

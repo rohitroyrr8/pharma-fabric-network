@@ -14,9 +14,9 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
-    - &AllParticipants
-        Name: AllParticipants
-        ID: AllParticipantsMSP
+    - &allparticipants
+        Name: allparticipants
+        ID: allparticipantsMSP
         MSPDir: ../crypto-config/peerOrganizations/allparticipants.trueclaim.com/msp
         AnchorPeers:
             - Host: peer1.allparticipants.trueclaim.com
@@ -24,13 +24,13 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('AllParticipantsMSP.admin', 'AllParticipantsMSP.peer', 'AllParticipantsMSP.client')"
+                Rule: "OR('allparticipantsMSP.admin', 'allparticipantsMSP.peer', 'allparticipantsMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('AllParticipantsMSP.admin', 'AllParticipantsMSP.client')"
+                Rule: "OR('allparticipantsMSP.admin', 'allparticipantsMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('AllParticipantsMSP.admin')"
+                Rule: "OR('allparticipantsMSP.admin')"
 
 #Capabilities
 
@@ -125,13 +125,13 @@ Profiles:
         Consortiums:
             ClaimsConsortium:
                 Organizations:
-                    - *AllParticipants
+                    - *allparticipants
 
     ChannelGenesis:
         Consortium: ClaimsConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *AllParticipants
+                - *allparticipants
             Capabilities:
                 <<: *ApplicationCapabilities
