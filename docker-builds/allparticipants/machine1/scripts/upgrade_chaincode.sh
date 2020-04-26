@@ -16,7 +16,7 @@ setChaincodePath() {
     echo $'\n'""$'\n'
     echo $'\n'"Info: Setting CC_SRC_PATH!"$'\n'
 
-    if ! CC_SRC_PATH=/opt/gopath/src/github.com/TrueClaim-SmartContract; then
+    if ! CC_SRC_PATH=/opt/gopath/src/github.com/pharma-smart-contract; then
         echo $'\n'"Failure: Failed to set CC_SRC_PATH!"$'\n'
         exit 1
     fi
@@ -47,7 +47,7 @@ installChaincode() {
     echo $'\n'""$'\n'
     echo $'\n'"Info: Installing chaincode !"$'\n'
 
-    if ! peer chaincode install -n TrueClaim-SmartContract -v $1 -p $CC_SRC_PATH -l $CC_RUNTIME_LANGUAGE; then
+    if ! peer chaincode install -n pharma-smart-contract -v $1 -p $CC_SRC_PATH -l $CC_RUNTIME_LANGUAGE; then
         echo $'\n'"Failure: Failed installing chaincode!"$'\n'
         exit 1 
     fi
@@ -58,7 +58,7 @@ upgradeChaincode() {
     echo $'\n'""$'\n'
     echo $'\n'"Info: Upgrading chaincode !"$'\n'
 
-    if ! peer chaincode upgrade -o orderer.trueclaim.com:7050 -C claimschannel --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp/tlscacerts/tlsca.trueclaim.com-cert.pem -n TrueClaim-SmartContract -l node -v $1 -c '{"Args":[]}' -P "OR ('AllParticipantsMSP.member','AllParticipantsMSP.peer', 'AllParticipantsMSP.admin', 'AllParticipantsMSP.client')" --collections-config  /opt/gopath/src/github.com/TrueClaim-SmartContract/private_data_collection/collections_config.json; then
+    if ! peer chaincode upgrade -o orderer.trueclaim.com:7050 -C claimschannel --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp/tlscacerts/tlsca.trueclaim.com-cert.pem -n pharma-smart-contract -l node -v $1 -c '{"Args":[]}' -P "OR ('AllParticipantsMSP.member','AllParticipantsMSP.peer', 'AllParticipantsMSP.admin', 'AllParticipantsMSP.client')" --collections-config  /opt/gopath/src/github.com/pharma-smart-contract/private_data_collection/collections_config.json; then
         echo $'\n'"Failure: Error upgrading chaincode!"$'\n'
         exit 1 
     fi
