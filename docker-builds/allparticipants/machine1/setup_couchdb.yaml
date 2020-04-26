@@ -1,0 +1,48 @@
+version: '2'
+
+networks:
+  claimsnetwork:
+    external:
+      name: claimsnetwork
+
+services:
+
+  couchdb.peer0.allparticipants.trueclaim.com:
+    container_name: couchdb.peer0.allparticipants.trueclaim.com
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "5984:5984"
+    networks:
+      - claimsnetwork
+
+  peer0.allparticipants.trueclaim.com:
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.allparticipants.trueclaim.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - couchdb.peer0.allparticipants.trueclaim.com
+
+  couchdb.peer1.allparticipants.trueclaim.com:
+    container_name: couchdb.peer1.allparticipants.trueclaim.com
+    image: hyperledger/fabric-couchdb
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "6984:5984"
+    networks:
+      - claimsnetwork
+
+  peer1.allparticipants.trueclaim.com:
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer1.allparticipants.trueclaim.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - couchdb.peer1.allparticipants.trueclaim.com

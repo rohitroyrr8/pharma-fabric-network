@@ -21,12 +21,12 @@ function setPeerEnvironmentVariables() {
         exit 1
     fi
 
-    if ! CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.pharma-network.com/users/Admin@$2.pharma-network.com/msp; then
+    if ! CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.trueclaim.com/users/Admin@$2.trueclaim.com/msp; then
         echo $'\n'"Failure: Failed to set CORE_PEER_MSPCONFIGPATH!"$'\n'
         exit 1
     fi
 
-    if ! CORE_PEER_ADDRESS=$1.$2.pharma-network.com:7051; then
+    if ! CORE_PEER_ADDRESS=$1.$2.trueclaim.com:7051; then
         echo $'\n'"Failure: Failed to set CORE_PEER_ADDRESS!"$'\n'
         exit 1
     fi
@@ -37,17 +37,17 @@ function setPeerEnvironmentVariables() {
     fi
 
 
-    if ! CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.pharma-network.com/peers/$1.$2.pharma-network.com/tls/ca.crt; then
+    if ! CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.trueclaim.com/peers/$1.$2.trueclaim.com/tls/ca.crt; then
         echo $'\n'"Failure: Failed to set CORE_PEER_TLS_ROOTCERT_FILE!"$'\n'
         exit 1
     fi
 
-    if ! CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.pharma-network.com/peers/$1.$2.pharma-network.com/tls/server.crt; then
+    if ! CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.trueclaim.com/peers/$1.$2.trueclaim.com/tls/server.crt; then
         echo $'\n'"Failure: Failed to set CORE_PEER_TLS_CERT_FILE!"$'\n'
         exit 1
     fi
 
-    if ! CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.pharma-network.com/peers/$1.$2.pharma-network.com/tls/server.key; then
+    if ! CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/$2.trueclaim.com/peers/$1.$2.trueclaim.com/tls/server.key; then
         echo $'\n'"Failure: Failed to set CORE_PEER_TLS_KEY_FILE!"$'\n'
         exit 1
     fi
@@ -59,7 +59,7 @@ function createChannel() {
     
     echo $'\n'"Creating channel..."$'\n'
     
-    if peer channel create -o orderer.pharma-network.com:7050 -c $CHANNEL_NAME -f ../channel-artifacts/channel.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/pharma-network.com/orderers/orderer.pharma-network.com/msp/tlscacerts/tlsca.pharma-network.com-cert.pem; then
+    if peer channel create -o orderer.trueclaim.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp/tlscacerts/tlsca.trueclaim.com-cert.pem; then
         echo $'\n'"Success: Channel created."$'\n'
         echo $'\n'"Sleeping for 30 seconds...."$'\n'
         sleep 30
@@ -74,7 +74,7 @@ function joinChannel() {
     
     echo $'\n'"Joining channel..."$'\n'
 
-    if peer channel join -b pharmachannel.block; then
+    if peer channel join -b claimschannel.block; then
         echo $'\n'"Success: Channel joined."$'\n'
         echo $'\n'"Sleeping for 30 seconds...."$'\n'
         sleep 30
@@ -88,7 +88,7 @@ function updateMSPAnchors() {
 
     echo $'\n'"Updating MSP Anchors..."$'\n'
 
-    if ! peer channel update -o orderer.pharma-network.com:7050 -c $CHANNEL_NAME -f ../channel-artifacts/$1anchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/pharma-network.com/orderers/orderer.pharma-network.com/msp/tlscacerts/tlsca.pharma-network.com-cert.pem; then
+    if ! peer channel update -o orderer.trueclaim.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/$1anchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp/tlscacerts/tlsca.trueclaim.com-cert.pem; then
         echo $'\n'"Failure: Failed to update MSP Anchor!"$'\n'
         exit 1
     else
@@ -99,7 +99,7 @@ function updateMSPAnchors() {
 }
 
 #1. Setting channel name
-setChannelName pharmachannel
+setChannelName claimschannel
 
 #2. Set environment variables for each of the peer and join the channel
 

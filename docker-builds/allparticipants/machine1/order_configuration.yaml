@@ -1,9 +1,9 @@
-version: '1'
+version: '2'
 
 services:
 
-  orderer.pharma-network.com:
-    container_name: orderer.pharma-network.com
+  orderer.trueclaim.com:
+    container_name: orderer.trueclaim.com
     image: hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - ORDERER_GENERAL_LOGLEVEL=DEBUG
@@ -20,8 +20,8 @@ services:
     command: orderer
     volumes:
       - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-      - ./crypto-config/ordererOrganizations/pharma-network.com/orderers/orderer.pharma-network.com/msp:/var/hyperledger/orderer/msp
-      - ./crypto-config/ordererOrganizations/pharma-network.com/orderers/orderer.pharma-network.com/tls/:/var/hyperledger/orderer/tls
-      - orderer.pharma-network.com:/var/hyperledger/production/orderer
+      - ./crypto-config/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp:/var/hyperledger/orderer/msp
+      - ./crypto-config/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/tls/:/var/hyperledger/orderer/tls
+      - orderer.trueclaim.com:/var/hyperledger/production/orderer
     ports:
       - 7050:7050

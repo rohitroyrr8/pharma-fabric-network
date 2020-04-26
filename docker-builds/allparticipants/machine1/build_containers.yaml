@@ -1,0 +1,47 @@
+version: '2'
+
+volumes:
+  orderer.trueclaim.com:
+  peer0.allparticipants.trueclaim.com:
+  peer1.allparticipants.trueclaim.com:
+
+networks:
+  claimsnetwork:
+    external:
+      name: claimsnetwork
+
+services:
+
+  ca.allparticipants.trueclaim.com:
+    extends:
+      file: ca_configuration.yaml
+      service: ca.allparticipants.trueclaim.com
+    container_name: ca.allparticipants.trueclaim.com
+    networks:
+      - claimsnetwork
+  
+  orderer.trueclaim.com:
+    extends:
+      file: orderer_configuration.yaml
+      service: orderer.trueclaim.com
+    container_name: orderer.trueclaim.com
+    networks:
+      - claimsnetwork
+
+  peer0.allparticipants.trueclaim.com:
+    container_name: peer0.allparticipants.trueclaim.com
+    extends:
+      file: peer_configuration.yaml
+      service: peer0.allparticipants.trueclaim.com
+    networks:
+      - claimsnetwork
+
+  peer1.allparticipants.trueclaim.com:
+    container_name: peer1.allparticipants.trueclaim.com
+    extends:
+      file: peer_configuration.yaml
+      service: peer1.allparticipants.trueclaim.com
+    networks:
+      - claimsnetwork
+
+

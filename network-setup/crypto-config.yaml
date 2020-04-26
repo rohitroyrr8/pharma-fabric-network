@@ -1,0 +1,23 @@
+# Setting up orderer of the network
+OrdererOrgs:
+
+  - Name: Orderer
+    Domain: trueclaim.com
+
+    Specs:
+      - Hostname: orderer
+
+# Setting up peer orgs of the network
+PeerOrgs:
+
+  - Name: AllParticipants
+    Domain: allparticipants.trueclaim.com
+    EnableNodeOUs: true
+
+    # Template count is the number of peer nodes for this organization
+    Template:
+      Count: 2
+
+    Users:
+      Count: 1
+  
