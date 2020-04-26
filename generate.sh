@@ -141,7 +141,7 @@ echo "##########################################################"
 echo "# Generating anchor transactions using configtxgen tool  #"
 echo "##########################################################"
 
-for i in ${network_orgs[@]}
+for i in "${network_orgs[@]}"
 do
     createAnchorPeerTransactions $i
 done
