@@ -63,8 +63,8 @@ function copyOrgCerts() {
 
     echo $'\n'"Copying new genesis and channel configuration..."$'\n'
     cp -r ./channel-artifacts/* ./docker-builds/$1/machine1/channel-artifacts/
-    rm -rf ./crypto-config/*
-    rm -rf ./channel-artifacts/*
+    rm -rf ./crypto-config
+    rm -rf ./channel-artifacts
     echo $'\n'"Copied successfully!"$'\n'
 
 }
