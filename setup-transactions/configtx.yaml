@@ -14,7 +14,7 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
-    - &allparticipants
+    - &AllParticipants
         Name: AllParticipants
         ID: AllParticipantsMSP
         MSPDir: ../crypto-config/peerOrganizations/allparticipants.trueclaim.com/msp

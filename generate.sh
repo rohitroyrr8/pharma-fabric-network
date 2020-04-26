@@ -1,4 +1,4 @@
-network_orgs=(allparticipants)
+network_orgs=(AllParticipants)
 
 function generateCerts() {
     if [ -d "crypto-config" ]; then
