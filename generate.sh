@@ -141,7 +141,7 @@ echo "##########################################################"
 
 for i in ${network_orgs[@]}
 do
-    createAnchorPeerTransactions $i
+    createAnchorPeerTransactions ${i,,}
 done
 
 echo "#####################################################################################"
