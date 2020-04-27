@@ -1,4 +1,5 @@
 network_orgs=(AllParticipants)
+export FABRIC_CFG_PATH=../channel-artifacts/
 
 function setChannelName() {
 
