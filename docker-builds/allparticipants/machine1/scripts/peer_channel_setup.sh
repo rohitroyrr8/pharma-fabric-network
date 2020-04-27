@@ -1,5 +1,5 @@
 network_orgs=(AllParticipants)
-export FABRIC_CFG_PATH=../channel-artifacts/
+FABRIC_CFG_PATH=../channel-artifacts/
 
 function setChannelName() {
 
@@ -59,7 +59,7 @@ function setPeerEnvironmentVariables() {
 function createChannel() {
     
     echo $'\n'"Creating channel..."$'\n'
-    
+    FABRIC_CFG_PATH=../channel-artifacts/
     if peer channel create -o orderer.trueclaim.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp/tlscacerts/tlsca.trueclaim.com-cert.pem; then
         echo $'\n'"Success: Channel created."$'\n'
         echo $'\n'"Sleeping for 30 seconds...."$'\n'
@@ -74,7 +74,7 @@ function createChannel() {
 function joinChannel() {
     
     echo $'\n'"Joining channel..."$'\n'
-
+    FABRIC_CFG_PATH=../channel-artifacts/
     if peer channel join -b claimschannel.block; then
         echo $'\n'"Success: Channel joined."$'\n'
         echo $'\n'"Sleeping for 30 seconds...."$'\n'
