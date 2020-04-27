@@ -16,7 +16,7 @@ setChaincodePath() {
     echo $'\n'""$'\n'
     echo $'\n'"Info: Setting CC_SRC_PATH!"$'\n'
 
-    if ! CC_SRC_PATH=/opt/gopath/src/github.com/pharma-smartcontract; then
+    if ! CC_SRC_PATH=/opt/gopath/src/github.com/pharma-smart-contract; then
         echo $'\n'"Failure: Failed to set CC_SRC_PATH!"$'\n'
         exit 1
     fi
