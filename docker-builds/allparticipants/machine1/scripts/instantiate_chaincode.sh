@@ -16,7 +16,7 @@ setChaincodePath() {
     echo $'\n'""$'\n'
     echo $'\n'"Info: Setting CC_SRC_PATH!"$'\n'
 
-    if ! CC_SRC_PATH=/opt/gopath/src/github.com/pharma-smart-contract; then
+    if ! CC_SRC_PATH=/opt/gopath/src/github.com/pharma-smartcontract; then
         echo $'\n'"Failure: Failed to set CC_SRC_PATH!"$'\n'
         exit 1
     fi
@@ -47,7 +47,7 @@ installChaincode() {
     echo $'\n'""$'\n'
     echo $'\n'"Info: Installing chaincode !"$'\n'
 
-    if ! peer chaincode install -n pharma-smart-contract -v $1 -p $CC_SRC_PATH -l $CC_RUNTIME_LANGUAGE; then
+    if ! peer chaincode install -n pharma-smartcontract -v $1 -p $CC_SRC_PATH -l $CC_RUNTIME_LANGUAGE; then
         echo $'\n'"Failure: Failed installing chaincode!"$'\n'
         exit 1 
     fi
@@ -58,7 +58,7 @@ instantiateChaincode() {
     echo $'\n'""$'\n'
     echo $'\n'"Info: Instantiating chaincode !"$'\n'
 
-    if ! peer chaincode instantiate -o orderer.trueclaim.com:7050 -C claimschannel --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp/tlscacerts/tlsca.trueclaim.com-cert.pem -n pharma-smart-contract -l node -v $1 -c '{"Args":[]}' -P "OR ('AllParticipantsMSP.member','AllParticipantsMSP.peer', 'AllParticipantsMSP.admin', 'AllParticipantsMSP.client')" --collections-config  /opt/gopath/src/github.com/pharma-smart-contract/private_data_collection/collections_config.json; then 
+    if ! peer chaincode instantiate -o orderer.trueclaim.com:7050 -C claimschannel --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/trueclaim.com/orderers/orderer.trueclaim.com/msp/tlscacerts/tlsca.trueclaim.com-cert.pem -n pharma-smartcontract -l node -v $1 -c '{"Args":[]}' -P "OR ('AllParticipantsMSP.member','AllParticipantsMSP.peer', 'AllParticipantsMSP.admin', 'AllParticipantsMSP.client')" --collections-config  /opt/gopath/src/github.com/pharma-smartcontract/private_data_collection/collections_config.json; then 
         echo $'\n'"Failure: Error instantiating chaincode!"$'\n'
         exit 1 
     fi
